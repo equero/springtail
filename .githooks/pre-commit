@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Skip version bump if this is a merge or sync operation
+# Check if we're in a merge
+if [ -f ".git/MERGE_HEAD" ]; then
+    echo "✓ Merge in progress. Skipping pre-commit version bump."
+    exit 0
+fi
+
+# Skip if explicitly requested (used by sync-master.mjs)
+if [ "$SKIP_VERSION_BUMP" = "1" ]; then
+    echo "✓ SKIP_VERSION_BUMP set. Skipping pre-commit version bump."
+    exit 0
+fi
+
+if [ ! -f "package.json" ]; then
+    echo "package.json not found"
+    exit 0
+fi
+
+# Check staged files (not HEAD — we're in pre-commit, the commit doesn't exist yet)
+CHANGED_FILES=$(git diff --cached --name-only)
+
+NON_MD_FILES=$(echo "$CHANGED_FILES" | grep -v '\.md$')
+
+if [ -z "$NON_MD_FILES" ]; then
+    echo "✓ Only markdown files modified. Version not updated."
+    exit 0
+fi
+
+current_version=$(node -p "require('./package.json').version")
+
+if [ -z "$current_version" ]; then
+    echo "Could not read version from package.json"
+    exit 1
+fi
+
+IFS='.' read -r major minor patch <<< "$current_version"
+
+new_patch=$((patch + 1))
+new_version="$major.$minor.$new_patch"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/" package.json
+else
+    sed -i "s/\"version\": \"$current_version\"/\"version\": \"$new_version\"/" package.json
+fi
+
+git add package.json
+
+echo "✓ Version updated: $current_version → $new_version (added to commit)"
+
+exit 0

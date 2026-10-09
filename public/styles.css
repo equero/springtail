@@ -1,0 +1,391 @@
+:root {
+  --bg: #1a1b1e;
+  --surface: #202125;
+  --bar: #2a2b30;
+  --line: #34363c;
+  --fg: #d4d4d4;
+  --muted: #787c82;
+  --primary: #10b981;
+  --primary-soft: #bbf7d0;
+  --secondary: #facc15;
+  --error: #f87171;
+  --debug: #7dd3fc;
+  --sql: #c4b5fd;
+  --out: #a1a1aa;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "Consolas", ui-monospace, monospace;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font: 13px / 1.45 var(--font-mono);
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--bg);
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+kbd {
+  padding: 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--fg);
+  font: inherit;
+}
+
+code {
+  color: var(--primary);
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 8px 14px;
+  background: var(--bar);
+}
+
+.brand {
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cursor {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.connection {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.connection.live {
+  background: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
+}
+
+.connection.idle {
+  background: var(--secondary);
+}
+
+.connection.offline {
+  background: var(--error);
+}
+
+select {
+  max-width: 280px;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.file {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+}
+
+.field.grow {
+  flex: 1 1 280px;
+}
+
+.field:focus-within {
+  border-color: var(--primary);
+}
+
+.field.invalid {
+  border-color: var(--error);
+}
+
+.field input {
+  width: 100%;
+  min-width: 0;
+  padding: 5px 9px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+.field input::placeholder {
+  color: var(--muted);
+}
+
+.field .toggle {
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 0;
+}
+
+.levels,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+button {
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--muted);
+}
+
+button.on {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+#pause.on {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.chip {
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.4;
+}
+
+.chip.on {
+  opacity: 1;
+}
+
+.chip .count {
+  margin-left: 6px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.chip[data-level="ERROR"],
+.level-ERROR .level {
+  color: var(--error);
+}
+
+.chip[data-level="WARN"],
+.level-WARN .level {
+  color: var(--secondary);
+}
+
+.chip[data-level="INFO"],
+.level-INFO .level {
+  color: var(--primary);
+}
+
+.chip[data-level="DEBUG"],
+.level-DEBUG .level {
+  color: var(--debug);
+}
+
+.chip[data-level="TRACE"],
+.level-TRACE .level {
+  color: var(--muted);
+}
+
+.chip[data-level="SQL"],
+.level-SQL .level,
+.level-SQL .message {
+  color: var(--sql);
+}
+
+.chip[data-level="OUT"],
+.level-OUT .level {
+  color: var(--out);
+}
+
+.log {
+  flex: 1;
+  overflow: auto;
+  outline: 0;
+  font-size: 12px;
+  scrollbar-color: rgb(255 255 255 / 0.18) transparent;
+  scrollbar-width: thin;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 92px 48px minmax(120px, 240px) 1fr;
+  gap: 12px;
+  padding: 1px 14px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+
+.row:hover {
+  background: var(--surface);
+}
+
+.row.open {
+  padding-block: 4px;
+  border-left-color: var(--primary);
+  background: var(--surface);
+}
+
+.row.level-ERROR {
+  background: rgb(248 113 113 / 0.07);
+}
+
+.row.level-WARN {
+  background: rgb(250 204 21 / 0.05);
+}
+
+.row .time {
+  color: var(--muted);
+}
+
+.row .level {
+  font-weight: 700;
+}
+
+.row .logger {
+  overflow: hidden;
+  color: var(--primary-soft);
+  opacity: 0.75;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row .logger:hover {
+  opacity: 1;
+  text-decoration: underline wavy var(--primary);
+}
+
+.row .message {
+  min-width: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.row:not(.open) .message {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.more {
+  margin-left: 8px;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: var(--bar);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.meta {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+mark {
+  border-radius: 2px;
+  background: rgb(250 204 21 / 0.3);
+  color: inherit;
+}
+
+.divider,
+.placeholder {
+  padding: 8px 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.divider {
+  border-block: 1px dashed var(--line);
+}
+
+.placeholder {
+  padding-top: 64px;
+}
+
+.statusbar {
+  display: flex;
+  gap: 18px;
+  padding: 5px 14px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.statusbar .error {
+  color: var(--error);
+}
+
+.hints {
+  margin-left: auto;
+}
+
+@media (max-width: 760px) {
+  .row {
+    grid-template-columns: 80px 44px 1fr;
+  }
+
+  .row .logger,
+  .hints,
+  .file {
+    display: none;
+  }
+}

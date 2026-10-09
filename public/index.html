@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>springtail</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="titlebar">
+      <span id="connection" class="connection" title="Connecting"></span>
+      <span class="brand">springtail<span class="cursor">_</span></span>
+      <select id="source" aria-label="Project"></select>
+      <span id="file" class="file"></span>
+    </header>
+
+    <nav class="toolbar" aria-label="Filters">
+      <div class="field grow">
+        <input id="search" type="search" placeholder="search message, logger, thread…" autocomplete="off" spellcheck="false" />
+        <button id="case-toggle" type="button" class="toggle" title="Match case">Aa</button>
+        <button id="regex-toggle" type="button" class="toggle" title="Regular expression">.*</button>
+      </div>
+      <div class="field">
+        <input id="loggers" type="search" placeholder="loggers: com.acme, -org.hibernate" autocomplete="off" spellcheck="false" />
+      </div>
+      <div id="levels" class="levels"></div>
+      <div class="actions">
+        <button id="pause" type="button" title="Pause or resume (p)">Pause</button>
+        <button id="follow" type="button" class="on" title="Stick to the bottom (End)">Follow</button>
+        <button id="expand" type="button" title="Expand or collapse every row">Expand</button>
+        <button id="clear" type="button" title="Hide everything received so far">Clear</button>
+      </div>
+    </nav>
+
+    <main id="log" class="log"></main>
+
+    <footer class="statusbar">
+      <span id="count"></span>
+      <span id="error" class="error"></span>
+      <span class="hints">
+        <kbd>/</kbd> search · <kbd>p</kbd> pause · <kbd>End</kbd> follow · click a row to expand · click a logger to
+        filter, <kbd>Alt</kbd>+click to exclude
+      </span>
+    </footer>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
