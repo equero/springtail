@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!scripts", "!.githooks"]
+    "includes": ["**"]
   },
   "formatter": {
     "enabled": true,

@@ -107,14 +107,17 @@ src/
 public/      HTML, CSS and favicon
 ```
 
-Work happens on `develop`; `master` holds releases.
+Work happens on `develop`; `master` holds releases. Releases are done with
+[synkro](https://github.com/equero/synkro), always as a patch bump:
 
-- `pre-commit` bumps the patch version on every commit that touches more than markdown.
-- `post-merge` bumps the minor version and tags the release with a changelog when `develop` is merged
-  into `master`, then fast-forwards `develop`.
-- `npm run sync` (or `sync:minor`, `sync:patch`, `sync:no-tag`) drives that whole release.
+```bash
+synkro status                   # what the next release would contain
+synkro sync --patch             # merge develop into master, bump patch, tag, push
+synkro sync --patch --dry-run   # show what would happen, change nothing
+```
 
-Set `SKIP_VERSION_BUMP=1` to skip the hooks for a single commit.
+Each release is a single merge commit on `master` that also carries the new version, tagged
+`vX.Y.Z` with a changelog. `develop` is fast-forwarded to it afterwards.
 
 ## License
 
