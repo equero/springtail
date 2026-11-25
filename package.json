@@ -2,7 +2,7 @@
   "name": "springtail",
   "version": "0.1.2",
   "description": "Follow the log of a Maven / Spring Boot backend live in the browser.",
-  "author": "Habakuk Beneke",
+  "author": "Enrique Quero <equero@pm.me> (https://equero.dev)",
   "license": "GPL-3.0-only",
   "keywords": [
     "maven",
@@ -13,11 +13,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hbeneke/springtail.git"
+    "url": "git+https://github.com/equero/springtail.git"
   },
-  "homepage": "https://github.com/hbeneke/springtail#readme",
+  "homepage": "https://github.com/equero/springtail#readme",
   "bugs": {
-    "url": "https://github.com/hbeneke/springtail/issues"
+    "url": "https://github.com/equero/springtail/issues"
   },
   "type": "module",
   "bin": {

@@ -16,7 +16,7 @@ and tails them.
 Requires Node 22 or newer.
 
 ```bash
-git clone https://github.com/hbeneke/springtail.git
+git clone https://github.com/equero/springtail.git
 cd springtail
 npm install    # builds into dist/
 npm link       # puts the `springtail` command on your PATH
