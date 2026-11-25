@@ -54,20 +54,20 @@ The output still shows up in the terminal. Each capture starts a fresh log.
 
 Everything else:
 
-| Command | What it does |
-|---|---|
-| `springtail open [name]` | Open the viewer, on a given log if you pass one |
-| `springtail list` | Show the logs the viewer knows about |
-| `springtail unwatch <name>` | Stop following a watched file |
-| `springtail stop` | Stop the viewer |
+| Command                     | What it does                                    |
+| --------------------------- | ----------------------------------------------- |
+| `springtail open [name]`    | Open the viewer, on a given log if you pass one |
+| `springtail list`           | Show the logs the viewer knows about            |
+| `springtail unwatch <name>` | Stop following a watched file                   |
+| `springtail stop`           | Stop the viewer                                 |
 
 The viewer runs in the background on <http://localhost:8090> and only listens on `127.0.0.1`.
 Captured logs and settings live in `~/.springtail/`.
 
-| Variable | Default | |
-|---|---|---|
+| Variable          | Default         |                                                 |
+| ----------------- | --------------- | ----------------------------------------------- |
 | `SPRINGTAIL_HOME` | `~/.springtail` | Where captured logs and the watch list are kept |
-| `SPRINGTAIL_PORT` | `8090` | Viewer port |
+| `SPRINGTAIL_PORT` | `8090`          | Viewer port                                     |
 
 ## The viewer
 
@@ -77,16 +77,16 @@ Captured logs and settings live in `~/.springtail/`.
   keep their level, anything else is `OUT`.
 - Large files are read from their last 2 MB. When the file is truncated (a new run) the view starts over.
 
-| Control | |
-|---|---|
-| Search | Message, logger, thread and context. `Aa` for case, `.*` for regex. Shortcut `/` |
-| Loggers | Comma separated. `com.acme` keeps, `-org.hibernate` drops |
-| Levels | Click to toggle, double click to keep only that one |
-| Click a logger | Adds it to the filter, `Alt`+click excludes it |
-| Click a row | Shows the whole message and its metadata |
-| Pause (`p`) | Freezes the view while new lines pile up |
-| Follow (`End`) | Sticks to the bottom; scrolling up turns it off |
-| Clear | Hides everything received so far |
+| Control        |                                                                                  |
+| -------------- | -------------------------------------------------------------------------------- |
+| Search         | Message, logger, thread and context. `Aa` for case, `.*` for regex. Shortcut `/` |
+| Loggers        | Comma separated. `com.acme` keeps, `-org.hibernate` drops                        |
+| Levels         | Click to toggle, double click to keep only that one                              |
+| Click a logger | Adds it to the filter, `Alt`+click excludes it                                   |
+| Click a row    | Shows the whole message and its metadata                                         |
+| Pause (`p`)    | Freezes the view while new lines pile up                                         |
+| Follow (`End`) | Sticks to the bottom; scrolling up turns it off                                  |
+| Clear          | Hides everything received so far                                                 |
 
 It keeps the last 20,000 entries per log and draws at most the last 3,000 that pass the filters.
 
